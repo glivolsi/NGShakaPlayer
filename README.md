@@ -21,9 +21,8 @@ A simple Angular component for [Shaka-Player](https://github.com/google/shaka-pl
 ## Events Triggered
 
 The above events are automatically triggered and can be used by (playerEvent)
-...
-`pause, play, canplay, playing, waiting, ended, seeked, enterpictureinpicture, leavepictureinpicture,
-...
+
+`pause, play, canplay, playing, waiting, ended, seeked, enterpictureinpicture, leavepictureinpicture
 
 # Video Time Updated
 

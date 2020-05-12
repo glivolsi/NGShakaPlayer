@@ -1,0 +1,16 @@
+<shaka-player
+  [dashManifestUrl]="dashUrl"
+  [autoPlay]="autoplay"
+  posterUrl="../assets/poster.png"
+  (videoLoaded)="handleVideoLoaded()"
+  (videoTimeUpdated)="timeUpdated($event)"
+  (playerEvent)="playerEventHandler($event)"
+  [triggeredEvents]="events"
+>
+</shaka-player>
+{{ timestamp }}
+<div>
+  <input type="checkbox" (change)="autoplayChange()" />
+  <button (click)="vodButtonClick()">VOD</button>
+  <button (click)="liveButtonClick()">LIVE</button>
+</div>

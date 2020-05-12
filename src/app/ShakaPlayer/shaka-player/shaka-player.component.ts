@@ -116,6 +116,7 @@ export class ShakaPlayerComponent implements AfterViewInit, OnChanges {
       .load(this.dashManifestUrl)
       .then(() => {
         this.videoLoaded.emit();
+
         console.log(this.player.getConfiguration());
       })
       .catch(this.onError); // onError is executed if the asynchronous load fails.

@@ -26,6 +26,6 @@ The above events are automatically triggered and can be used by (playerEvent)
   pause,play,canplay,playing,waiting,ended,seeked,enterpictureinpicture,leavepictureinpicture
 ```
 
-## Video Time Updated Event
+## videoTimeUpdated Event
 
 Is triggered every second and output the seconds from the start of the playing media

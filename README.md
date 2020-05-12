@@ -22,8 +22,18 @@ A simple Angular component for [Shaka-Player](https://github.com/google/shaka-pl
 
 The above events are automatically triggered and can be used by (playerEvent)
 
-`pause, play, canplay, playing, waiting, ended, seeked, enterpictureinpicture, leavepictureinpicture
+```javascript
+pause,
+  play,
+  canplay,
+  playing,
+  waiting,
+  ended,
+  seeked,
+  enterpictureinpicture,
+  leavepictureinpicture;
+```
 
-# Video Time Updated
+## Video Time Updated
 
 Is triggered every second and output the seconds from the start of the playing media

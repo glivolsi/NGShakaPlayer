@@ -1,11 +1,12 @@
 <shaka-player
   [dashManifestUrl]="dashUrl"
   [autoPlay]="autoplay"
+  [triggeredEvents]="events"
   posterUrl="../assets/poster.png"
   (videoLoaded)="handleVideoLoaded()"
   (videoTimeUpdated)="timeUpdated($event)"
-  (playerEvent)="playerEventHandler($event)"
-  [triggeredEvents]="events"
+  (playerEvents)="playerEventHandler($event)"
+  (videoLoadError)="handleLoadError($event)"
 >
 </shaka-player>
 {{ timestamp }}

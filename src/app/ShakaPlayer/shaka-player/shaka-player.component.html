@@ -1,9 +1,11 @@
-<video
-  #videoPlayer
-  id="video"
-  [width]="width"
-  [height]="height"
-  controls
-  [poster]="posterUrl"
-  [autoplay]="autoPlay"
-></video>
+<div #videoContainer>
+  <video
+    #videoPlayer
+    id="video"
+    [width]="width"
+    [height]="height"
+    controls
+    [poster]="posterUrl"
+    [autoplay]="autoPlay"
+  ></video>
+</div>

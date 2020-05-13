@@ -14,8 +14,15 @@ export class AppComponent {
   //live = 'https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd';
   dashUrl = this.vod;
   events = ['mouseenter', 'mouseleave'];
+
   handleVideoLoaded() {
     console.log('video is loaded');
+  }
+
+  handleLoadError(event) {
+    console.log(
+      `Error ${event.data[1]} loading video ${event.data[0]} Severity:${event.severity} Code:${event.code}`
+    );
   }
 
   timeUpdated(t: number) {

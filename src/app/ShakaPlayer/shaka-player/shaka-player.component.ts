@@ -92,9 +92,9 @@ export class ShakaPlayerComponent implements AfterViewInit, OnChanges {
     this.load(this.dashManifestUrl);
   }
 
-  load(dashManifestUrl) {
+  public load(dashManifestUrl, startTime = null) {
     this.player
-      .load(this.dashManifestUrl)
+      .load(this.dashManifestUrl, startTime)
       .then(() => {
         this.videoLoaded.emit();
       })

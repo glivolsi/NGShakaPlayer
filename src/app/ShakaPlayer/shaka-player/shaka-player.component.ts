@@ -7,7 +7,7 @@ import {
   OnChanges,
   SimpleChanges,
   Output,
-  EventEmitter,
+  EventEmitter
 } from '@angular/core';
 //import * as shaka from 'shaka-player';
 import * as shaka from '../../../../node_modules/shaka-player/dist/shaka-player.ui.js';
@@ -20,7 +20,7 @@ import { distinctUntilChanged, map } from 'rxjs/operators';
 @Component({
   selector: 'shaka-player',
   templateUrl: './shaka-player.component.html',
-  styleUrls: ['./shaka-player.component.scss'],
+  styleUrls: ['./shaka-player.component.scss']
 })
 export class ShakaPlayerComponent implements AfterViewInit, OnChanges {
   @ViewChild('videoPlayer') videoElementRef: ElementRef;
@@ -34,7 +34,7 @@ export class ShakaPlayerComponent implements AfterViewInit, OnChanges {
   @Input() triggeredEvents: string[] = [];
   @Output() videoLoaded = new EventEmitter<any>();
   @Output() videoTimeUpdated = new EventEmitter<any>();
-  @Output() playerEvent = new EventEmitter<any>();
+  @Output() playerEvents = new EventEmitter<any>();
 
   constructor() {}
 
@@ -60,12 +60,12 @@ export class ShakaPlayerComponent implements AfterViewInit, OnChanges {
   private initPlayer() {
     fromEvent(this.videoElement, 'timeupdate')
       .pipe(
-        map((x) => {
+        map(x => {
           return x.srcElement && Math.trunc(x.srcElement['currentTime']);
         }),
         distinctUntilChanged()
       )
-      .subscribe((t) => this.videoTimeUpdated.emit(t));
+      .subscribe(t => this.videoTimeUpdated.emit(t));
 
     const events = [
       ...this.triggeredEvents,
@@ -77,41 +77,23 @@ export class ShakaPlayerComponent implements AfterViewInit, OnChanges {
       'ended',
       'seeked',
       'enterpictureinpicture',
-      'leavepictureinpicture',
-      'error',
+      'leavepictureinpicture'
     ];
 
     this.fromEvents(this.videoElement, events)
       .pipe(distinctUntilChanged())
       .subscribe((evt: Event) => {
-        this.playerEvent.emit(evt);
+        this.playerEvents.emit(evt);
       });
 
     // Create a Player instance.
     this.player = new shaka.Player(this.videoElement);
-    // this.evt$ = fromEvent(this.videoElement, events).subscribe((a) => {
-    //   console.log(a);
-    // });
 
-    // Listen for error events.
-    //this.player.addEventListener('error', this.onErrorEvent);
-    // this.player.addEventListener('canplay', onReady)
-    // this.player.addEventListener('play', onPlay)
-    // this.player.addEventListener('waiting', onBuffer)
-    // this.player.addEventListener('playing', onBufferEnd)
-    // this.player.addEventListener('pause', onPause)
-    // this.player.addEventListener('seeked', this.onSeek)
-    // this.player.addEventListener('ended', onEnded)
-    // this.player.addEventListener('error', onError)
-    // this.player.addEventListener('enterpictureinpicture', onEnablePIP)
-    // this.player.addEventListener('leavepictureinpicture', this.onDisablePIP)
+    this.player.addEventListener('error', this.onErrorEvent);
     this.load(this.dashManifestUrl);
   }
 
   load(dashManifestUrl) {
-    //if (this.player.isloaded) {
-    //this.player.detach();
-    //}
     this.player
       .load(this.dashManifestUrl)
       .then(() => {
@@ -133,7 +115,7 @@ export class ShakaPlayerComponent implements AfterViewInit, OnChanges {
   }
 
   fromEvents(video: HTMLVideoElement, events: string[]): Observable<Event> {
-    const eventStreams = events.map((ev) => fromEvent(video, ev));
+    const eventStreams = events.map(ev => fromEvent(video, ev));
     return merge(...eventStreams);
   }
 }

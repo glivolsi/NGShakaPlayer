@@ -1,4 +1,8 @@
-<div #videoContainer>
+<div
+  #videoContainer
+  class="shaka-video-container"
+  [ngStyle]="{ 'width.px': width, 'height.px': height }"
+>
   <video
     #videoPlayer
     id="video"
@@ -7,5 +11,6 @@
     controls
     [poster]="posterUrl"
     [autoplay]="autoPlay"
+    [muted]="muted"
   ></video>
 </div>

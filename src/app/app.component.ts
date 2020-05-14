@@ -9,12 +9,14 @@ export class AppComponent {
   @ViewChild('pippo', { static: false }) video;
   timestamp = 0;
   title = 'shaka';
-  autoplay = true;
+  autoplay = false;
+  mute = false;
   vod = 'http://10.32.130.51/vod/mp4:sample.mp4/manifest.mpd';
   live = 'http://10.32.130.51/live/myStream/manifest.mpd';
   //live = 'https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd';
   dashUrl = this.vod;
   events = ['mouseenter', 'mouseleave'];
+  currentTime: number | null = null;
 
   handleVideoLoaded() {
     console.log('video is loaded');
@@ -43,5 +45,12 @@ export class AppComponent {
   }
   autoplayChange() {
     this.autoplay = !this.autoplay;
+  }
+
+  muteChange() {
+    this.mute = !this.mute;
+  }
+  plus30ButtonHandler() {
+    this.currentTime = this.timestamp + 30;
   }
 }

@@ -1,18 +1,33 @@
 <shaka-player
   [dashManifestUrl]="dashUrl"
   [autoPlay]="autoplay"
+  [muted]="mute"
   [triggeredEvents]="events"
+  [currentTime]="currentTime"
   posterUrl="../assets/poster.png"
   (videoLoaded)="handleVideoLoaded()"
   (videoTimeUpdated)="timeUpdated($event)"
   (playerEvents)="playerEventHandler($event)"
   (videoLoadError)="handleLoadError($event)"
-  #pippo
 >
 </shaka-player>
 {{ timestamp }}
 <div>
-  <input type="checkbox" (change)="autoplayChange()" />
+  <label for="autoplay">Auto Play</label>
+  <input
+    type="checkbox"
+    [ngModel]="autoplay"
+    name="autoplay"
+    (change)="autoplayChange()"
+  />
+  <label for="mute">Mute</label>
+  <input
+    type="checkbox"
+    [ngModel]="autoplay"
+    name="mute"
+    (change)="muteChange()"
+  />
   <button (click)="vodButtonClick()">VOD</button>
   <button (click)="liveButtonClick()">LIVE</button>
+  <button (click)="plus30ButtonHandler()">+30 Sec</button>
 </div>

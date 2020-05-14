@@ -7,9 +7,10 @@
       this.videoElement
     );
     const config = {
-      controlPanelElements: ['rewind', 'fast_forward'],
+      controlPanelElements: ['skip'],
+      overflowMenuButtons: ['cast'],
+      addSeekBar: false,
     };
-    console.log(ui.getConfiguration());
+    ui.getControls();
 
-   ui.getControls();
 ```

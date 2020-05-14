@@ -26,10 +26,13 @@ export class ShakaPlayerComponent implements AfterViewInit, OnChanges {
   player: any;
   @Input() posterUrl: string | null = null;
   @Input() dashManifestUrl: string | null = null;
+  @Input() currentTime: string;
   @Input() width: string = '854';
   @Input() height: string = '480';
   @Input() autoPlay: boolean = true;
+  @Input() muted: boolean = false;
   @Input() triggeredEvents: string[] = [];
+
   @Output() videoLoaded = new EventEmitter<any>();
   @Output() videoLoadError = new EventEmitter<any>();
   @Output() videoTimeUpdated = new EventEmitter<any>();
@@ -38,8 +41,14 @@ export class ShakaPlayerComponent implements AfterViewInit, OnChanges {
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.player && changes.dashManifestUrl)
+    if (this.player && changes.dashManifestUrl) {
+      this.player.unload();
       this.load(changes.dashManifestUrl.currentValue);
+    }
+    if (this.player && changes.currentTime) {
+      this.player.getMediaElement().currentTime =
+        changes.currentTime.currentValue;
+    }
   }
 
   ngAfterViewInit(): void {
@@ -88,13 +97,20 @@ export class ShakaPlayerComponent implements AfterViewInit, OnChanges {
     // Create a Player instance.
     this.player = new shaka.Player(this.videoElement);
 
+    //---------------------------
+    // Put UI Customization HERE
+    //---------------------------
+
     // this.player load and
     this.load(this.dashManifestUrl);
+    console.log(this.currentTime);
+    if (this.currentTime)
+      this.player.getMediaElement().currentTime = parseInt(this.currentTime);
   }
 
-  public load(dashManifestUrl, startTime = null) {
+  public load(dashManifestUrl) {
     this.player
-      .load(this.dashManifestUrl, startTime)
+      .load(this.dashManifestUrl)
       .then(() => {
         this.videoLoaded.emit();
       })
